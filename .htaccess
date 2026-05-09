@@ -1,0 +1,44 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} !^localhost$
+RewriteCond %{HTTP_HOST} !^127\.0\.0\.1$
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect all 404 and 403 errors to index.php
+ErrorDocument 404 /index.php
+ErrorDocument 403 /index.php
+
+# Prevent directory listing
+Options -Indexes
+
+# Set security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
+
+# Block access to sensitive file types
+<FilesMatch "\.(sql|log|env|bak|swp)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Prevent execution of scripts inside uploads folder
+<FilesMatch "^uploads/.*\.(php|php3|php4|php5|phtml|pl|py|jsp|asp|sh|cgi)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Increase limits for hosting
+<IfModule mod_php.c>
+    php_value upload_max_filesize 20M
+    php_value post_max_size 20M
+    php_value max_execution_time 300
+    php_value memory_limit 256M
+</IfModule>
