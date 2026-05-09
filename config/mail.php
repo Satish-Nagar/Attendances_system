@@ -24,7 +24,7 @@ function sendSMTPMail($to, $subject, $body, $embeddedImages = []) {
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = '0173cs221120@gmail.com';
-        $mail->Password = 'ubdk hjjw dhwd zedl';
+        $mail->Password = 'SMTP_PASSWORD_PLACEHOLDER';
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
         $mail->setFrom('0173cs221120@gmail.com', 'QuickMark System');

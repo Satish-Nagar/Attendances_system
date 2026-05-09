@@ -21,10 +21,10 @@ class Database {
             $this->password = '';
         } else {
             // Production (InfinityFree)
-            $this->host = 'sql305.infinityfree.com';
-            $this->db_name = 'if0_39567190_QuickMark';
-            $this->username = 'if0_39567190';
-            $this->password = 'GjuzG99A9ZRcgHH';
+            $this->host = 'sql100.infinityfree.com';
+            $this->db_name = 'if0_41739228_QuickMark';
+            $this->username = 'if0_41739228';
+            $this->password = 'WQOv4JcPEOCEDEe';
         }
     }
 
