@@ -1,11 +1,11 @@
 # Enable URL rewriting
 RewriteEngine On
 
-# Force HTTPS
-RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} !^localhost$
-RewriteCond %{HTTP_HOST} !^127\.0\.0\.1$
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Force HTTPS (Disabled for troubleshooting)
+# RewriteCond %{HTTPS} off
+# RewriteCond %{HTTP_HOST} !^localhost$
+# RewriteCond %{HTTP_HOST} !^127\.0\.0\.1$
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Redirect all 404 and 403 errors to index.php
 ErrorDocument 404 /index.php
