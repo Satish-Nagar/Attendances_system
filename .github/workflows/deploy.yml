@@ -12,6 +12,15 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
 
+      - name: 🛠️ Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, ctype, iconv, gd, zip, dom, simplexml, xmlreader, xmlwriter, fileinfo
+
+      - name: 📦 Install Dependencies
+        run: composer install --no-dev --prefer-dist --optimize-autoloader
+
       - name: 🔐 Inject Secrets
         run: |
           sed -i "s/SMTP_PASSWORD_PLACEHOLDER/${{ secrets.SMTP_PASSWORD }}/g" config/mail.php
@@ -28,7 +37,6 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
-            **/vendor/**
             database/**
             README.md
             .gitignore
