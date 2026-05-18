@@ -19,7 +19,7 @@ jobs:
           extensions: mbstring, xml, ctype, iconv, gd, zip, dom, simplexml, xmlreader, xmlwriter, fileinfo
 
       - name: 📦 Install Dependencies
-        run: composer install --no-dev --prefer-dist --optimize-autoloader
+        run: composer install --no-dev --prefer-dist --optimize-autoloader --no-audit
 
       - name: 🔐 Inject Secrets
         run: |
