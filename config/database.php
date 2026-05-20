@@ -13,7 +13,10 @@ class Database {
 
     public function __construct() {
         // Automatically detect environment
-        if ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['REMOTE_ADDR'] === '127.0.0.1') {
+        $host = $_SERVER['HTTP_HOST'] ?? '';
+        $remoteAddr = $_SERVER['REMOTE_ADDR'] ?? '';
+
+        if ($host === 'localhost' || in_array($remoteAddr, ['127.0.0.1', '::1'], true)) {
             // Local Development (XAMPP)
             $this->host = 'localhost';
             $this->db_name = 'attendance_system';
@@ -21,10 +24,10 @@ class Database {
             $this->password = '';
         } else {
             // Production (InfinityFree)
-            $this->host = 'sql100.infinityfree.com';
-            $this->db_name = 'if0_41739228_QuickMark';
-            $this->username = 'if0_41739228';
-            $this->password = 'WQOv4JcPEOCEDEe';
+            $this->host = getenv('DB_HOST') ?: 'DB_HOST_PLACEHOLDER';
+            $this->db_name = getenv('DB_NAME') ?: 'DB_NAME_PLACEHOLDER';
+            $this->username = getenv('DB_USERNAME') ?: 'DB_USERNAME_PLACEHOLDER';
+            $this->password = getenv('DB_PASSWORD') ?: 'DB_PASSWORD_PLACEHOLDER';
         }
     }
 

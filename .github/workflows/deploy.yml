@@ -22,8 +22,36 @@ jobs:
         run: composer install --no-dev --prefer-dist --optimize-autoloader --no-audit
 
       - name: 🔐 Inject Secrets
+        env:
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
-          sed -i "s/SMTP_PASSWORD_PLACEHOLDER/${{ secrets.SMTP_PASSWORD }}/g" config/mail.php
+          python - <<'PY'
+          import os
+          def replace_in_file(path, replacements):
+              with open(path, 'r', encoding='utf-8') as f:
+                  data = f.read()
+              for k, v in replacements.items():
+                  if not v:
+                      continue
+                  data = data.replace(k, v)
+              with open(path, 'w', encoding='utf-8') as f:
+                  f.write(data)
+          
+          replace_in_file('config/mail.php', {
+              'SMTP_PASSWORD_PLACEHOLDER': os.environ.get('SMTP_PASSWORD'),
+          })
+          
+          replace_in_file('config/database.php', {
+              'DB_HOST_PLACEHOLDER': os.environ.get('DB_HOST'),
+              'DB_NAME_PLACEHOLDER': os.environ.get('DB_NAME'),
+              'DB_USERNAME_PLACEHOLDER': os.environ.get('DB_USERNAME'),
+              'DB_PASSWORD_PLACEHOLDER': os.environ.get('DB_PASSWORD'),
+          })
+          PY
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
