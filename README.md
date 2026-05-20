@@ -55,6 +55,8 @@ Update the following configuration files:
 
 This project is open source and available under the MIT License. 
 
+<!-- Deployment trigger -->
+
 ---
 
 ## **Why the Table and Copy Are Not Working**
