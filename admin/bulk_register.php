@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['faculties_file']) &&
             if ($stmt->execute([$faculty['name'], $faculty['designation'], $faculty['email'], $faculty['contact'], $faculty['college'], $hashed])) {
                 // Send email with credentials
                 $subject = "Your Faculty Account - QuickMark";
-                $login_url = 'http://quickmark.kesug.com/login.php';
+                $login_url = getAppUrl('login.php');
                 $message = getWelcomeEmailHTML($faculty['name'], 'faculty', $faculty['email'], $faculty['password'], $login_url);
                 $embeddedImages = ['app_logo' => __DIR__ . '/images/download.png'];
                 $sent = sendSMTPMail($faculty['email'], $subject, $message, $embeddedImages);

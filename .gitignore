@@ -13,6 +13,6 @@ uploads/
 temp/
 *.sql
 
-# Credentials (uncomment if you want to exclude them)
-# config/database.php
-# config/mail.php
+# Local overrides (never commit real credentials)
+config/local.php
+test_db_connection.php

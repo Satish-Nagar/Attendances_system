@@ -32,7 +32,7 @@ try {
             }
         } else {
             echo "<p style='color: red;'>❌ Admins table does not exist!</p>";
-            echo "<p>Please run the database setup script: <code>database/attendance_system.sql</code></p>";
+            echo "<p>Please import your database schema into the <code>quickmark</code> database (phpMyAdmin).</p>";
         }
     } else {
         echo "<p style='color: red;'>❌ Database connection failed!</p>";

@@ -1,6 +1,13 @@
 # Simplified .htaccess
 RewriteEngine On
 
+# Force HTTP on production (InfinityFree may serve HTTPS via proxy)
+RewriteCond %{HTTP_HOST} !^localhost(:\d+)?$ [NC]
+RewriteCond %{HTTP_HOST} !^127\.0\.0\.1(:\d+)?$ [NC]
+RewriteCond %{HTTPS} =on [OR]
+RewriteCond %{HTTP:X-Forwarded-Proto} =https
+RewriteRule ^(.*)$ http://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
 # Prevent directory listing
 Options -Indexes
 

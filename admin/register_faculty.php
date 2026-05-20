@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $result = $stmt->execute([$name, $email, $hashed_password]);
                 if ($result) {
                     $subject = 'Welcome to Smart Attendance System';
-                    $login_url = 'http://quickmark.kesug.com/login.php';
+                    $login_url = getAppUrl('login.php');
                     $body = getWelcomeEmailHTML($name, 'admin', $email, $password, $login_url);
                     $embeddedImages = ['app_logo' => __DIR__ . '/images/download.png'];
                     sendSMTPMail($email, $subject, $body, $embeddedImages);
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $result = $stmt->execute([$name, $designation, $email, $contact, $college, $hashed_password]);
                     if ($result) {
                         $subject = 'Welcome to Smart Attendance System';
-                        $login_url = 'http://quickmark.kesug.com/login.php';
+                        $login_url = getAppUrl('login.php');
                         $body = getWelcomeEmailHTML($name, 'faculty', $email, $password, $login_url);
                         $embeddedImages = ['app_logo' => __DIR__ . '/images/download.png'];
                         sendSMTPMail($email, $subject, $body, $embeddedImages);

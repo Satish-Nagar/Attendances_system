@@ -127,12 +127,7 @@ class PasswordReset {
             return false;
         }
         
-        $host = $_SERVER['HTTP_HOST'] ?? '';
-        $httpsOn = ($_SERVER['HTTPS'] ?? '') === 'on';
-        $forwardedProto = strtolower($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '');
-        $scheme = ($httpsOn || $forwardedProto === 'https') ? 'https' : 'http';
-
-        $reset_link = $scheme . "://" . $host . "/reset_password.php?token=" . urlencode($token);
+        $reset_link = getAppUrl('reset_password.php') . '?token=' . urlencode($token);
         
         $subject = "Password Reset Request - QuickMark";
         $body = "

@@ -4,6 +4,9 @@
  * Smart Attendance Automation System
  */
 
+require_once __DIR__ . '/../config/app.php';
+enforceHttpOnProduction();
+
 session_start();
 
 // Include database configuration

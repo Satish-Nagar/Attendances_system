@@ -28,21 +28,23 @@ A web-based multi-section attendance automation system built with Core PHP and M
 
 ## Installation
 
-1. Clone this repository to your web server directory
-2. Import the database schema from `database/attendance_system.sql`
-3. Configure database connection in `config/database.php`
-4. Configure email settings in `config/mail.php`
+1. Clone this repository to your XAMPP `htdocs` folder
+2. Create/import the `quickmark` database in phpMyAdmin (tables: admins, faculties, students, etc.)
+3. Open the app in the browser — local DB settings are applied automatically (`localhost`, `root`, database `quickmark`)
+4. Configure email settings in `config/mail.php` if needed
 5. Access the application through your web browser
 
 ## Database Setup
 
-Run the SQL script in `database/attendance_system.sql` to create all necessary tables.
+Use your `quickmark` database in phpMyAdmin. On XAMPP, no manual edit of `config/database.php` is required for local development.
+
+Optional: copy `config/local.example.php` to `config/local.php` to override host, database name, or password on your machine (`local.php` is not committed to Git).
 
 ## Configuration
 
-Update the following configuration files:
-- `config/database.php` - Database connection settings
-- `config/mail.php` - Email configuration for SMTP
+- **Local (XAMPP):** `config/database.php` detects localhost and connects to `quickmark`
+- **Production (InfinityFree):** set GitHub repository secrets — `DB_HOST`, `DB_NAME`, `DB_USERNAME`, `DB_PASSWORD` (and FTP/SMTP secrets). Pushing to `main` runs the deploy workflow and injects these into the uploaded files.
+- `config/mail.php` — Email configuration for SMTP
 
 ## Usage
 
